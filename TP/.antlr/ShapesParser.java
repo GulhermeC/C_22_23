@@ -151,6 +151,7 @@ public class ShapesParser extends Parser {
 		}
 	}
 	public static class StatExprContext extends StatContext {
+		public ExprContext expr;
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -165,7 +166,11 @@ public class ShapesParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(18);
-			expr(0);
+			((StatExprContext)_localctx).expr = expr(0);
+
+			    if (((StatExprContext)_localctx).expr.res != null) 
+			        System.out.println("Result (A): " +((StatExprContext)_localctx).expr.res);
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -219,7 +224,9 @@ public class ShapesParser extends Parser {
 		public ExprNumberContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprMultDivContext extends ExprContext {
+		public ExprContext e1;
 		public Token op;
+		public ExprContext e2;
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
@@ -245,7 +252,7 @@ public class ShapesParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(27);
+			setState(32);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__4:
@@ -254,12 +261,13 @@ public class ShapesParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(21);
-				match(T__4);
 				setState(22);
-				expr(0);
+				match(T__4);
 				setState(23);
+				expr(0);
+				setState(24);
 				match(T__5);
+
 				}
 				break;
 			case T__6:
@@ -267,8 +275,9 @@ public class ShapesParser extends Parser {
 				_localctx = new ExprDistanceContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(25);
+				setState(27);
 				distance();
+
 				}
 				break;
 			case Number:
@@ -276,15 +285,16 @@ public class ShapesParser extends Parser {
 				_localctx = new ExprNumberContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(26);
+				setState(30);
 				match(Number);
+
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(37);
+			setState(46);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -292,16 +302,17 @@ public class ShapesParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(35);
+					setState(44);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExprMultDivContext(new ExprContext(_parentctx, _parentState));
+						((ExprMultDivContext)_localctx).e1 = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(29);
+						setState(34);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(30);
+						setState(35);
 						((ExprMultDivContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==T__0 || _la==T__1) ) {
@@ -312,17 +323,31 @@ public class ShapesParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(31);
-						expr(6);
+						setState(36);
+						((ExprMultDivContext)_localctx).e2 = expr(6);
+
+						                      Double res = null;
+						                      Double e1 = ((ExprMultDivContext)_localctx).e1.res;
+						                      Double e2 = ((ExprMultDivContext)_localctx).e2.res;
+						                      
+						                      switch(((ExprMultDivContext)_localctx).op.getText()){
+						                          case "*":
+						                              ((ExprMultDivContext)_localctx).res =  e1 * e2;
+						                              break;
+						                          case "/":
+						                              ((ExprMultDivContext)_localctx).res =  e1 / e2;
+						                              break;
+						                      }
+						                  
 						}
 						break;
 					case 2:
 						{
 						_localctx = new ExprAddSubContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(32);
+						setState(39);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(33);
+						setState(40);
 						((ExprAddSubContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==T__2 || _la==T__3) ) {
@@ -333,14 +358,15 @@ public class ShapesParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(34);
+						setState(41);
 						expr(5);
+
 						}
 						break;
 					}
 					} 
 				}
-				setState(39);
+				setState(48);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
@@ -377,11 +403,11 @@ public class ShapesParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40);
+			setState(49);
 			match(T__6);
-			setState(41);
+			setState(50);
 			point();
-			setState(42);
+			setState(51);
 			point();
 			}
 		}
@@ -417,15 +443,15 @@ public class ShapesParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(44);
+			setState(53);
 			match(T__4);
-			setState(45);
+			setState(54);
 			expr(0);
-			setState(46);
+			setState(55);
 			match(T__7);
-			setState(47);
+			setState(56);
 			expr(0);
-			setState(48);
+			setState(57);
 			match(T__5);
 			}
 		}
@@ -458,20 +484,22 @@ public class ShapesParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\f\65\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\7\2\16\n\2\f\2\16\2\21\13\2\3\2\3\2\3"+
-		"\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4\36\n\4\3\4\3\4\3\4\3\4\3\4\3\4"+
-		"\7\4&\n\4\f\4\16\4)\13\4\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\2"+
-		"\3\6\7\2\4\6\b\n\2\4\3\2\3\4\3\2\5\6\2\64\2\17\3\2\2\2\4\24\3\2\2\2\6"+
-		"\35\3\2\2\2\b*\3\2\2\2\n.\3\2\2\2\f\16\5\4\3\2\r\f\3\2\2\2\16\21\3\2\2"+
-		"\2\17\r\3\2\2\2\17\20\3\2\2\2\20\22\3\2\2\2\21\17\3\2\2\2\22\23\7\2\2"+
-		"\3\23\3\3\2\2\2\24\25\5\6\4\2\25\5\3\2\2\2\26\27\b\4\1\2\27\30\7\7\2\2"+
-		"\30\31\5\6\4\2\31\32\7\b\2\2\32\36\3\2\2\2\33\36\5\b\5\2\34\36\7\13\2"+
-		"\2\35\26\3\2\2\2\35\33\3\2\2\2\35\34\3\2\2\2\36\'\3\2\2\2\37 \f\7\2\2"+
-		" !\t\2\2\2!&\5\6\4\b\"#\f\6\2\2#$\t\3\2\2$&\5\6\4\7%\37\3\2\2\2%\"\3\2"+
-		"\2\2&)\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\7\3\2\2\2)\'\3\2\2\2*+\7\t\2\2+"+
-		",\5\n\6\2,-\5\n\6\2-\t\3\2\2\2./\7\7\2\2/\60\5\6\4\2\60\61\7\n\2\2\61"+
-		"\62\5\6\4\2\62\63\7\b\2\2\63\13\3\2\2\2\6\17\35%\'";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\f>\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\7\2\16\n\2\f\2\16\2\21\13\2\3\2\3\2\3\3"+
+		"\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4#\n\4\3\4\3\4"+
+		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4/\n\4\f\4\16\4\62\13\4\3\5\3\5\3\5"+
+		"\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\2\3\6\7\2\4\6\b\n\2\4\3\2\3\4\3\2\5\6"+
+		"\2=\2\17\3\2\2\2\4\24\3\2\2\2\6\"\3\2\2\2\b\63\3\2\2\2\n\67\3\2\2\2\f"+
+		"\16\5\4\3\2\r\f\3\2\2\2\16\21\3\2\2\2\17\r\3\2\2\2\17\20\3\2\2\2\20\22"+
+		"\3\2\2\2\21\17\3\2\2\2\22\23\7\2\2\3\23\3\3\2\2\2\24\25\5\6\4\2\25\26"+
+		"\b\3\1\2\26\5\3\2\2\2\27\30\b\4\1\2\30\31\7\7\2\2\31\32\5\6\4\2\32\33"+
+		"\7\b\2\2\33\34\b\4\1\2\34#\3\2\2\2\35\36\5\b\5\2\36\37\b\4\1\2\37#\3\2"+
+		"\2\2 !\7\13\2\2!#\b\4\1\2\"\27\3\2\2\2\"\35\3\2\2\2\" \3\2\2\2#\60\3\2"+
+		"\2\2$%\f\7\2\2%&\t\2\2\2&\'\5\6\4\b\'(\b\4\1\2(/\3\2\2\2)*\f\6\2\2*+\t"+
+		"\3\2\2+,\5\6\4\7,-\b\4\1\2-/\3\2\2\2.$\3\2\2\2.)\3\2\2\2/\62\3\2\2\2\60"+
+		".\3\2\2\2\60\61\3\2\2\2\61\7\3\2\2\2\62\60\3\2\2\2\63\64\7\t\2\2\64\65"+
+		"\5\n\6\2\65\66\5\n\6\2\66\t\3\2\2\2\678\7\7\2\289\5\6\4\29:\7\n\2\2:;"+
+		"\5\6\4\2;<\7\b\2\2<\13\3\2\2\2\6\17\".\60";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
