@@ -1,0 +1,5 @@
+antlr4-main -v Execute.java
+antlr4-clean
+antlr4-visitor Execute String
+antlr4-run
+antlr4-build
