@@ -1,4 +1,4 @@
-// Generated from /home/gjscraveiro/Desktop/Uni/C/guiao02/ex01/Hello.g4 by ANTLR 4.9.2
+// Generated from /home/gjscraveiro/Desktop/Uni/C/C_22_23/guiao02/ex01/Hello.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
