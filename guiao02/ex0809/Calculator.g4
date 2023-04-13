@@ -11,6 +11,7 @@ stat :
 expr:
         expr op=('*'|'/'|'%') expr      #ExprMultDivMod
     |   expr op=('+'|'-') expr          #ExprAddSub
+    |   'reduce' expr '/' expr          #ExprReduce
     |   Integer                         #ExprInteger
     |   '(' expr ')'                    #ExprParent
     |   ID                              #ExprVar

@@ -81,20 +81,6 @@ public class Translator extends CalculatorBaseVisitor<Double> {
       return res;
    }
 
-   @Override public Double visitExprReduce(CalculatorParser.ExprReduceContext ctx) {
-      Double res = null;
-      Double o1 = visit(ctx.expr(0));
-      Double o2 = visit(ctx.expr(1));
-      Double d = __gcd(o1, o2);
-
-      o1 = o1 / d;
-      o2 = o2 / d;
-      members.add(Double.toString(o1));
-      members.add(Double.toString(o2));
-      System.out.println("Simplify: " + o1 + "/" + o2);
-      return res;
-   }
-
    @Override public Double visitExprMultDivMod(CalculatorParser.ExprMultDivModContext ctx) {
       Double res = null;
       Double o1 = visit(ctx.expr(0));
@@ -118,12 +104,5 @@ public class Translator extends CalculatorBaseVisitor<Double> {
       members.add(ctx.op.getText());
       System.out.println("Result: " + res);
       return res;
-   }
-
-   static double __gcd(double a, double b)
-   {
-      if(b == 0)
-         return a;
-      return __gcd(b,(a % b));
    }
 }
