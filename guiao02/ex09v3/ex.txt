@@ -1,0 +1,13 @@
+2/4 -> x
+x = x + '1/2';
+print x;
+
+compiler
+String id = ctx.ID.getText()
+String exp = visit(ctx.expr());
+out.println("Fraction " + id + "=" + expr + ";");
+
+interpreter
+String key = ctx.ID.getText()
+Fraction value = visit(ctx.expr());
+map.put(key, value);

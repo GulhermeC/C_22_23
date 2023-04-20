@@ -4,3 +4,9 @@ antlr4-visitor Execute String
 antlr4-run
 antlr4-build
 antlr4-listener Grammar ListenName
+
+antlr4 CLexer.g4
+antlr4 CParser.g4
+antlr4-javac C*java
+antlr4-test C file
+

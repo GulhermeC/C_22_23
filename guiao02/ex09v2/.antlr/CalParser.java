@@ -1,4 +1,4 @@
-// Generated from /home/gjscraveiro/Desktop/Uni/C/C_22_23/guiao02/ex0809/Calculator.g4 by ANTLR 4.9.2
+// Generated from /home/gjscraveiro/Desktop/Uni/C/C_22_23/guiao02/ex09v2/CalParser.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,15 +9,15 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class CalculatorParser extends Parser {
+public class CalParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		ID=10, Integer=11, NEWLINE=12, WS=13, COMMENT=14;
+		NEWLINE=1, REDUCE=2, DIV=3, Integer=4, PARSOPEN=5, PARSCLOSE=6, ID=7, 
+		EQUAL=8, MULT=9, REST=10, PLUS=11, MINUS=12;
 	public static final int
 		RULE_program = 0, RULE_stat = 1, RULE_expr = 2;
 	private static String[] makeRuleNames() {
@@ -29,14 +29,13 @@ public class CalculatorParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'*'", "'/'", "'%'", "'+'", "'-'", "'reduce'", "'('", "')'", "'='"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, "ID", "Integer", 
-			"NEWLINE", "WS", "COMMENT"
+			null, "NEWLINE", "REDUCE", "DIV", "Integer", "PARSOPEN", "PARSCLOSE", 
+			"ID", "EQUAL", "MULT", "REST", "PLUS", "MINUS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -74,7 +73,7 @@ public class CalculatorParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Calculator.g4"; }
+	public String getGrammarFileName() { return "CalParser.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -85,13 +84,13 @@ public class CalculatorParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public CalculatorParser(TokenStream input) {
+	public CalParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	public static class ProgramContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(CalculatorParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(CalParser.EOF, 0); }
 		public List<StatContext> stat() {
 			return getRuleContexts(StatContext.class);
 		}
@@ -124,7 +123,7 @@ public class CalculatorParser extends Parser {
 				setState(9); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__5) | (1L << T__6) | (1L << ID) | (1L << Integer) | (1L << NEWLINE))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NEWLINE) | (1L << REDUCE) | (1L << Integer) | (1L << PARSOPEN) | (1L << ID))) != 0) );
 			setState(11);
 			match(EOF);
 			}
@@ -141,7 +140,7 @@ public class CalculatorParser extends Parser {
 	}
 
 	public static class StatContext extends ParserRuleContext {
-		public TerminalNode NEWLINE() { return getToken(CalculatorParser.NEWLINE, 0); }
+		public TerminalNode NEWLINE() { return getToken(CalParser.NEWLINE, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -161,7 +160,7 @@ public class CalculatorParser extends Parser {
 			setState(14);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__5) | (1L << T__6) | (1L << ID) | (1L << Integer))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REDUCE) | (1L << Integer) | (1L << PARSOPEN) | (1L << ID))) != 0)) {
 				{
 				setState(13);
 				expr(0);
@@ -195,7 +194,7 @@ public class CalculatorParser extends Parser {
 		}
 	}
 	public static class ExprVarContext extends ExprContext {
-		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
+		public TerminalNode ID() { return getToken(CalParser.ID, 0); }
 		public ExprVarContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprAddSubContext extends ExprContext {
@@ -206,32 +205,39 @@ public class CalculatorParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
+		public TerminalNode PLUS() { return getToken(CalParser.PLUS, 0); }
+		public TerminalNode MINUS() { return getToken(CalParser.MINUS, 0); }
 		public ExprAddSubContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprParentContext extends ExprContext {
+		public TerminalNode PARSOPEN() { return getToken(CalParser.PARSOPEN, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
+		public TerminalNode PARSCLOSE() { return getToken(CalParser.PARSCLOSE, 0); }
 		public ExprParentContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprAssignContext extends ExprContext {
-		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
+		public TerminalNode ID() { return getToken(CalParser.ID, 0); }
+		public TerminalNode EQUAL() { return getToken(CalParser.EQUAL, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public ExprAssignContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprIntegerContext extends ExprContext {
-		public TerminalNode Integer() { return getToken(CalculatorParser.Integer, 0); }
+		public TerminalNode Integer() { return getToken(CalParser.Integer, 0); }
 		public ExprIntegerContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprReduceContext extends ExprContext {
+		public TerminalNode REDUCE() { return getToken(CalParser.REDUCE, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
+		public TerminalNode DIV() { return getToken(CalParser.DIV, 0); }
 		public ExprReduceContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 	public static class ExprMultDivModContext extends ExprContext {
@@ -242,6 +248,9 @@ public class CalculatorParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
+		public TerminalNode MULT() { return getToken(CalParser.MULT, 0); }
+		public TerminalNode DIV() { return getToken(CalParser.DIV, 0); }
+		public TerminalNode REST() { return getToken(CalParser.REST, 0); }
 		public ExprMultDivModContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 
@@ -271,11 +280,11 @@ public class CalculatorParser extends Parser {
 				_prevctx = _localctx;
 
 				setState(19);
-				match(T__5);
+				match(REDUCE);
 				setState(20);
 				expr(0);
 				setState(21);
-				match(T__1);
+				match(DIV);
 				setState(22);
 				expr(5);
 				}
@@ -295,11 +304,11 @@ public class CalculatorParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(25);
-				match(T__6);
+				match(PARSOPEN);
 				setState(26);
 				expr(0);
 				setState(27);
-				match(T__7);
+				match(PARSCLOSE);
 				}
 				break;
 			case 4:
@@ -319,7 +328,7 @@ public class CalculatorParser extends Parser {
 				setState(30);
 				match(ID);
 				setState(31);
-				match(T__8);
+				match(EQUAL);
 				setState(32);
 				expr(1);
 				}
@@ -346,7 +355,7 @@ public class CalculatorParser extends Parser {
 						setState(36);
 						((ExprMultDivModContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << T__2))) != 0)) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIV) | (1L << MULT) | (1L << REST))) != 0)) ) {
 							((ExprMultDivModContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
@@ -367,7 +376,7 @@ public class CalculatorParser extends Parser {
 						setState(39);
 						((ExprAddSubContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==T__3 || _la==T__4) ) {
+						if ( !(_la==PLUS || _la==MINUS) ) {
 							((ExprAddSubContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
@@ -417,20 +426,20 @@ public class CalculatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20\61\4\2\t\2\4\3"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\16\61\4\2\t\2\4\3"+
 		"\t\3\4\4\t\4\3\2\6\2\n\n\2\r\2\16\2\13\3\2\3\2\3\3\5\3\21\n\3\3\3\3\3"+
 		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4$\n\4"+
 		"\3\4\3\4\3\4\3\4\3\4\3\4\7\4,\n\4\f\4\16\4/\13\4\3\4\2\3\6\5\2\4\6\2\4"+
-		"\3\2\3\5\3\2\6\7\2\65\2\t\3\2\2\2\4\20\3\2\2\2\6#\3\2\2\2\b\n\5\4\3\2"+
-		"\t\b\3\2\2\2\n\13\3\2\2\2\13\t\3\2\2\2\13\f\3\2\2\2\f\r\3\2\2\2\r\16\7"+
-		"\2\2\3\16\3\3\2\2\2\17\21\5\6\4\2\20\17\3\2\2\2\20\21\3\2\2\2\21\22\3"+
-		"\2\2\2\22\23\7\16\2\2\23\5\3\2\2\2\24\25\b\4\1\2\25\26\7\b\2\2\26\27\5"+
-		"\6\4\2\27\30\7\4\2\2\30\31\5\6\4\7\31$\3\2\2\2\32$\7\r\2\2\33\34\7\t\2"+
-		"\2\34\35\5\6\4\2\35\36\7\n\2\2\36$\3\2\2\2\37$\7\f\2\2 !\7\f\2\2!\"\7"+
-		"\13\2\2\"$\5\6\4\3#\24\3\2\2\2#\32\3\2\2\2#\33\3\2\2\2#\37\3\2\2\2# \3"+
-		"\2\2\2$-\3\2\2\2%&\f\t\2\2&\'\t\2\2\2\',\5\6\4\n()\f\b\2\2)*\t\3\2\2*"+
-		",\5\6\4\t+%\3\2\2\2+(\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\7\3\2\2\2"+
-		"/-\3\2\2\2\7\13\20#+-";
+		"\4\2\5\5\13\f\3\2\r\16\2\65\2\t\3\2\2\2\4\20\3\2\2\2\6#\3\2\2\2\b\n\5"+
+		"\4\3\2\t\b\3\2\2\2\n\13\3\2\2\2\13\t\3\2\2\2\13\f\3\2\2\2\f\r\3\2\2\2"+
+		"\r\16\7\2\2\3\16\3\3\2\2\2\17\21\5\6\4\2\20\17\3\2\2\2\20\21\3\2\2\2\21"+
+		"\22\3\2\2\2\22\23\7\3\2\2\23\5\3\2\2\2\24\25\b\4\1\2\25\26\7\4\2\2\26"+
+		"\27\5\6\4\2\27\30\7\5\2\2\30\31\5\6\4\7\31$\3\2\2\2\32$\7\6\2\2\33\34"+
+		"\7\7\2\2\34\35\5\6\4\2\35\36\7\b\2\2\36$\3\2\2\2\37$\7\t\2\2 !\7\t\2\2"+
+		"!\"\7\n\2\2\"$\5\6\4\3#\24\3\2\2\2#\32\3\2\2\2#\33\3\2\2\2#\37\3\2\2\2"+
+		"# \3\2\2\2$-\3\2\2\2%&\f\t\2\2&\'\t\2\2\2\',\5\6\4\n()\f\b\2\2)*\t\3\2"+
+		"\2*,\5\6\4\t+%\3\2\2\2+(\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\7\3\2"+
+		"\2\2/-\3\2\2\2\7\13\20#+-";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
