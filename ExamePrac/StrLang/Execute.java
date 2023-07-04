@@ -36,7 +36,7 @@ public class Execute extends StrLangBaseVisitor<String> {
       String res = null;
       String var = ctx.VAR().getText();
       //System.out.println("Var" + var);
-      String content = ctx.asexpr().getText();
+      String content = visit(ctx.asexpr());
       //System.out.println("Content" + content);
       Variables.put(var, content);
       return visitChildren(ctx);
@@ -72,8 +72,8 @@ public class Execute extends StrLangBaseVisitor<String> {
 
    @Override public String visitPrintAdd(StrLangParser.PrintAddContext ctx) {
       String res = null;
-      String var1 = ctx.pexpr(0).getText();
-      String var2 = ctx.pexpr(1).getText();
+      String var1 = visit(ctx.pexpr(0));
+      String var2 = visit(ctx.pexpr(1));
       res = var1 + var2;
       System.out.println(res);
       return visitChildren(ctx);
