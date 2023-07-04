@@ -82,8 +82,9 @@ public class Execute extends StrLangBaseVisitor<String> {
 
    @Override public String visitAssigStr(StrLangParser.AssigStrContext ctx) {
       String res = null;
-      return visitChildren(ctx);
-      //return res;
+      res = ctx.STR().getText();
+      //return visitChildren(ctx);
+      return res;
    }
 
    @Override public String visitAssigPar(StrLangParser.AssigParContext ctx) {
@@ -94,8 +95,12 @@ public class Execute extends StrLangBaseVisitor<String> {
 
    @Override public String visitAssigAdd(StrLangParser.AssigAddContext ctx) {
       String res = null;
-      return visitChildren(ctx);
-      //return res;
+      String var1 = visit(ctx.asexpr(0));
+      String var2 = visit(ctx.asexpr(1));
+      System.out.println("Variable1: " + var1);
+      res = var1 + var2;
+      //return visitChildren(ctx);
+      return res;
    }
 
    @Override public String visitAssigInput(StrLangParser.AssigInputContext ctx) {
@@ -110,7 +115,9 @@ public class Execute extends StrLangBaseVisitor<String> {
 
    @Override public String visitAssigVar(StrLangParser.AssigVarContext ctx) {
       String res = null;
-      return visitChildren(ctx);
-      //return res;
+      String var = ctx.VAR().getText();
+      res = Variables.get(var);
+      //return visitChildren(ctx);
+      return res;
    }
 }
